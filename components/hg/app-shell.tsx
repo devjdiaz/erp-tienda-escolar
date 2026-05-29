@@ -4,12 +4,12 @@ import { useApp } from "@/contexts/app-context";
 import { USER_BY_ROLE, SECTION_META } from "@/lib/mock-data";
 import { Sidebar } from "./sidebar";
 import { TopHeader } from "./top-header";
-import DashboardScreen from "@/app/(dashboard)/dashboard/page";
-import POSScreen from "@/app/(dashboard)/pos/page";
-import InventoryScreen from "@/app/(dashboard)/inventory/page";
-import ReportsScreen from "@/app/(dashboard)/reports/page";
-import LossesScreen from "@/app/(dashboard)/losses/page";
-import UsersScreen from "@/app/(dashboard)/users/page";
+import DashboardScreen from "@/components/hg/screens/dashboard";
+import POSScreen from "@/components/hg/screens/pos";
+import InventoryScreen from "@/components/hg/screens/inventory";
+import ReportsScreen from "@/components/hg/screens/reports";
+import LossesScreen from "@/components/hg/screens/losses";
+import UsersScreen from "@/components/hg/screens/users";
 import LoginScreen from "@/app/login/page";
 
 export function AppShell() {
