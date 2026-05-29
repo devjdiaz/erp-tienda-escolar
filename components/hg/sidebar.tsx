@@ -22,42 +22,21 @@ export function Sidebar({ role, active, onNavigate, mobileOpen = false, onMobile
       {mobileOpen && (
         <div
           onClick={onMobileClose}
-          style={{
-            position: "fixed", inset: 0,
-            background: "rgba(8,25,63,.55)",
-            zIndex: 29,
-          }}
           className="sidebar-backdrop"
         />
       )}
 
-      <aside
-        className={mobileOpen ? "hg-sidebar hg-sidebar--open" : "hg-sidebar"}
-        style={{
-          width: 266, flexShrink: 0, height: "100%",
-          background: "linear-gradient(180deg, var(--hg-navy-900) 0%, var(--hg-navy-850) 55%, var(--hg-navy-700) 140%)",
-          color: "#fff", display: "flex", flexDirection: "column",
-          position: "relative", boxShadow: "2px 0 24px rgba(8,25,63,.18)", zIndex: 30,
-        }}
-      >
+      <aside className={`hg-sidebar${mobileOpen ? " hg-sidebar--open" : ""}`}>
+        {/* Close button — mobile only */}
+        <button onClick={onMobileClose} className="sidebar-close-btn">
+          <Icon name="x" size={18} />
+        </button>
+
         {/* Brand */}
         <div style={{
           padding: "20px 18px 16px", display: "flex", alignItems: "center", gap: 12,
           borderBottom: "1px solid rgba(255,255,255,.08)",
         }}>
-          {/* Close button (mobile only) */}
-          <button
-            onClick={onMobileClose}
-            className="sidebar-close-btn"
-            style={{
-              display: "none", position: "absolute", top: 14, right: 14,
-              color: "rgba(255,255,255,.7)", background: "rgba(255,255,255,.1)",
-              border: "none", borderRadius: 9, padding: 8, cursor: "pointer",
-            }}
-          >
-            <Icon name="x" size={18} />
-          </button>
-
           <div style={{
             width: 46, height: 46, borderRadius: 12,
             background: "rgba(255,255,255,.06)", border: "1px solid rgba(255,255,255,.12)",
