@@ -31,18 +31,6 @@ export function AppShell() {
 
   return (
     <div style={{ display: "flex", height: "100%", overflow: "hidden", position: "relative" }}>
-      {/* Mobile backdrop */}
-      {sidebarOpen && (
-        <div
-          onClick={() => setSidebarOpen(false)}
-          style={{
-            position: "fixed", inset: 0, background: "rgba(8,25,63,.55)",
-            zIndex: 29, display: "none",
-          }}
-          className="mobile-backdrop"
-        />
-      )}
-
       <Sidebar
         role={role}
         active={activeNav}

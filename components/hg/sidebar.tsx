@@ -26,7 +26,7 @@ export function Sidebar({ role, active, onNavigate, mobileOpen = false, onMobile
         />
       )}
 
-      <aside className={`hg-sidebar${mobileOpen ? " hg-sidebar--open" : ""}`}>
+      <aside className={`hg-sidebar${mobileOpen ? " is-open" : ""}`}>
         {/* Close button — mobile only */}
         <button onClick={onMobileClose} className="sidebar-close-btn">
           <Icon name="x" size={18} />

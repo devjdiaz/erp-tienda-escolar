@@ -180,27 +180,11 @@
 /* ===== POS category scroll ===== */
 .pos-cats::-webkit-scrollbar { height: 0; }
 
-/* ===== Responsive ===== */
-@media (max-width: 1200px) {
-  .pos-grid { grid-template-columns: minmax(0,1fr) 340px !important; }
-}
-@media (max-width: 1080px) {
-  .kpi-grid { grid-template-columns: 1fr 1fr !important; }
-  .dash-row, .dash-row3 { grid-template-columns: 1fr !important; }
-  .hide-sm { display: none !important; }
-  .hg-headsearch { display: none !important; }
-}
-@media (max-width: 860px) {
-  .pos-grid { grid-template-columns: 1fr !important; grid-template-rows: 1fr auto; }
-  .pos-cart { border-left: none !important; border-top: 1px solid var(--hg-line); max-height: 46vh; }
-}
-@media (max-width: 680px) {
-  .login-hero { display: none !important; }
-  .login-formwrap { flex: 1 1 100% !important; }
-  .kpi-grid { grid-template-columns: 1fr !important; }
-}
+/* ========================================================================
+   SIDEBAR — desktop in-flow, mobile off-canvas drawer
+   ======================================================================== */
 
-/* ===== Sidebar base (desktop) ===== */
+/* Base = desktop: sidebar lives in the flex flow */
 .hg-sidebar {
   width: 266px;
   flex-shrink: 0;
@@ -210,115 +194,119 @@
   display: flex;
   flex-direction: column;
   box-shadow: 2px 0 24px rgba(8,25,63,.18);
-  z-index: 30;
   position: relative;
+  z-index: 30;
+  transform: none;
 }
 
-/* Close btn hidden on desktop */
-.sidebar-close-btn {
-  display: none;
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  color: rgba(255,255,255,.7);
-  background: rgba(255,255,255,.1);
-  border: none;
-  border-radius: 9px;
-  padding: 8px;
-  cursor: pointer;
-  z-index: 2;
-}
-
-/* Backdrop hidden by default */
-.sidebar-backdrop {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(8,25,63,.55);
-  z-index: 29;
-}
-
-/* Hamburger hidden on desktop */
+/* These three only ever appear on mobile */
+.sidebar-close-btn { display: none; }
+.sidebar-backdrop { display: none; }
 .mobile-hamburger { display: none !important; }
 
-/* ===== Mobile (≤768px) ===== */
-@media (max-width: 768px) {
-  /* Sidebar becomes fixed off-canvas drawer */
+/* ========================================================================
+   RESPONSIVE BREAKPOINTS
+   ======================================================================== */
+
+/* Large laptop — shrink POS cart column */
+@media (max-width: 1200px) {
+  .pos-grid { grid-template-columns: minmax(0,1fr) 340px !important; }
+}
+
+/* Tablet landscape — collapse dashboard charts to 1 column */
+@media (max-width: 1080px) {
+  .kpi-grid { grid-template-columns: 1fr 1fr !important; }
+  .dash-row, .dash-row3 { grid-template-columns: 1fr !important; }
+  .hg-headsearch { display: none !important; }
+}
+
+/* ========================================================================
+   MOBILE + TABLET PORTRAIT (≤1024px) — off-canvas drawer
+   Catches iPad portrait (1024px) and all phones.
+   ======================================================================== */
+@media (max-width: 1024px) {
+  /* Sidebar becomes a fixed off-canvas drawer, OUT of flex flow */
   .hg-sidebar {
     position: fixed;
     top: 0;
     left: 0;
     height: 100dvh;
-    width: 280px;
+    width: min(82vw, 300px);
     transform: translateX(-100%);
     transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 50;
+    z-index: 60;
+    box-shadow: none;
   }
-  .hg-sidebar--open {
+  /* Open state — driven by JS state class */
+  .hg-sidebar.is-open {
     transform: translateX(0);
-    box-shadow: 4px 0 32px rgba(8,25,63,.4);
-  }
-  .sidebar-close-btn {
-    display: flex !important;
-  }
-  .sidebar-backdrop {
-    display: block !important;
+    box-shadow: 6px 0 40px rgba(8,25,63,.45);
   }
 
-  /* Hamburger visible */
+  /* Backdrop only when drawer open */
+  .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(8,25,63,.55);
+    z-index: 55;
+    animation: appfade-quick 0.2s ease;
+  }
+
+  /* Close button inside drawer */
+  .sidebar-close-btn {
+    display: flex;
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,.8);
+    background: rgba(255,255,255,.12);
+    border: none;
+    border-radius: 9px;
+    padding: 8px;
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  /* Hamburger visible in header */
   .mobile-hamburger { display: flex !important; }
 
-  /* Hide role switch & search in header */
+  /* Header: hide search */
   .hg-headsearch { display: none !important; }
-  .role-switch-btn { display: none !important; }
 
-  /* Header title smaller */
-  header h1 { font-size: 17px !important; }
+  /* Dashboard banner stacks */
+  .dash-banner-inner { flex-direction: column !important; align-items: flex-start !important; gap: 14px !important; }
+  .dash-banner-btns { width: 100% !important; flex-wrap: wrap !important; }
 
-  /* Dashboard banner: stack vertically */
-  .dash-banner-inner {
-    flex-direction: column !important;
-    gap: 14px !important;
-  }
-  .dash-banner-btns {
-    width: 100% !important;
-    flex-wrap: wrap !important;
-  }
-
-  /* KPIs: 2 columns */
+  /* Grids collapse */
   .kpi-grid { grid-template-columns: 1fr 1fr !important; }
-
-  /* Dash charts/rows: 1 column */
   .dash-row, .dash-row3 { grid-template-columns: 1fr !important; }
 
-  /* POS stacked */
-  .pos-grid {
-    grid-template-columns: 1fr !important;
-    grid-template-rows: 1fr auto !important;
-  }
-  .pos-cart {
-    border-left: none !important;
-    border-top: 1px solid var(--hg-line) !important;
-    max-height: 44vh !important;
-  }
+  /* POS stacks */
+  .pos-grid { grid-template-columns: 1fr !important; grid-template-rows: 1fr auto !important; }
+  .pos-cart { border-left: none !important; border-top: 1px solid var(--hg-line) !important; max-height: 46vh !important; }
 
-  /* Hide subtitle in header */
-  .hide-sm { display: none !important; }
-
-  /* Page padding reduced */
-  .app-fade {
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-  }
-
-  /* Login: form full width */
+  /* Login: hide hero, form full width */
   .login-hero { display: none !important; }
   .login-formwrap { flex: 1 1 100% !important; padding: 24px 20px !important; }
 }
 
-/* ===== Small phones (≤390px) ===== */
-@media (max-width: 390px) {
+@keyframes appfade-quick { from { opacity: 0; } to { opacity: 1; } }
+
+/* ========================================================================
+   PHONES (≤640px)
+   ======================================================================== */
+@media (max-width: 640px) {
+  header { padding: 0 14px !important; gap: 10px !important; }
+  header h1 { font-size: 16px !important; }
+  .hide-sm { display: none !important; }
+  .app-fade { padding-left: 14px !important; padding-right: 14px !important; }
+}
+
+/* Small phones */
+@media (max-width: 400px) {
   .kpi-grid { grid-template-columns: 1fr !important; }
   .login-formwrap { padding: 20px 16px !important; }
-  .hg-sidebar { width: 260px; }
 }
