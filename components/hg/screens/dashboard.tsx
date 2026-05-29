@@ -15,25 +15,27 @@ export default function DashboardScreen({ onGoto }: DashboardProps) {
     <div className="app-fade" style={{ padding: "24px 26px 40px", maxWidth: 1320, margin: "0 auto" }}>
       {/* Greeting banner */}
       <div style={{
-        display: "flex", alignItems: "center", gap: 18, marginBottom: 22, padding: "18px 22px",
+        marginBottom: 22, padding: "18px 22px",
         borderRadius: "var(--radius)",
         background: "linear-gradient(110deg, var(--hg-navy-900), var(--hg-navy-700) 78%, var(--hg-blue-500))",
         color: "#fff", position: "relative", overflow: "hidden",
       }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/eagle.png" alt="" style={{ position: "absolute", right: -10, top: "50%", transform: "translateY(-50%)", height: 130, opacity: 0.16 }} />
-        <div style={{ flex: 1, position: "relative" }}>
-          <div style={{ fontSize: 12.5, color: "var(--hg-gold)", fontWeight: 800, fontFamily: "Montserrat, system-ui", letterSpacing: ".06em" }}>
-            VIERNES · 29 DE MAYO, 2026
+        <div className="dash-banner-inner" style={{ display: "flex", alignItems: "center", gap: 18, position: "relative" }}>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 12.5, color: "var(--hg-gold)", fontWeight: 800, fontFamily: "Montserrat, system-ui", letterSpacing: ".06em" }}>
+              VIERNES · 29 DE MAYO, 2026
+            </div>
+            <h2 style={{ margin: "4px 0 4px", fontSize: 23, fontWeight: 800 }}>Buenas tardes, Diego 🦅</h2>
+            <p style={{ margin: 0, color: "rgba(255,255,255,.78)", fontSize: 14 }}>
+              La tienda lleva <b style={{ color: "#fff" }}>{Q(KPIS.ventasHoy)}</b> en ventas hoy. Vas <b style={{ color: "var(--hg-gold)" }}>+14%</b> vs. ayer.
+            </p>
           </div>
-          <h2 style={{ margin: "4px 0 4px", fontSize: 23, fontWeight: 800 }}>Buenas tardes, Diego 🦅</h2>
-          <p style={{ margin: 0, color: "rgba(255,255,255,.78)", fontSize: 14 }}>
-            La tienda lleva <b style={{ color: "#fff" }}>{Q(KPIS.ventasHoy)}</b> en ventas hoy. Vas <b style={{ color: "var(--hg-gold)" }}>+14%</b> vs. ayer.
-          </p>
-        </div>
-        <div style={{ position: "relative", display: "flex", gap: 10 }}>
-          <Btn kind="gold" icon="pos" onClick={() => onGoto?.("pos")}>Abrir Caja</Btn>
-          <Btn kind="ghost" icon="download" style={{ background: "rgba(255,255,255,.1)", border: "1px solid rgba(255,255,255,.2)", color: "#fff" }}>Reporte</Btn>
+          <div className="dash-banner-btns" style={{ display: "flex", gap: 10, flexShrink: 0 }}>
+            <Btn kind="gold" icon="pos" onClick={() => onGoto?.("pos")}>Abrir Caja</Btn>
+            <Btn kind="ghost" icon="download" style={{ background: "rgba(255,255,255,.1)", border: "1px solid rgba(255,255,255,.2)", color: "#fff" }}>Reporte</Btn>
+          </div>
         </div>
       </div>
 

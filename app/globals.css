@@ -199,3 +199,86 @@
   .login-formwrap { flex: 1 1 100% !important; }
   .kpi-grid { grid-template-columns: 1fr !important; }
 }
+
+/* ===== Mobile (≤768px) ===== */
+@media (max-width: 768px) {
+  /* Sidebar: off-canvas drawer */
+  .hg-sidebar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    height: 100% !important;
+    transform: translateX(-100%);
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 30 !important;
+  }
+  .hg-sidebar--open {
+    transform: translateX(0) !important;
+    box-shadow: 4px 0 32px rgba(8,25,63,.35) !important;
+  }
+  .sidebar-close-btn {
+    display: flex !important;
+  }
+
+  /* Hamburger button visible */
+  .mobile-hamburger {
+    display: flex !important;
+  }
+
+  /* Role switch & bell hidden on mobile header */
+  .role-switch-btn { display: none !important; }
+
+  /* Header title smaller */
+  header h1 { font-size: 17px !important; }
+
+  /* Dashboard greeting banner: stack vertically */
+  .dash-banner-inner {
+    flex-direction: column !important;
+    gap: 14px !important;
+  }
+  .dash-banner-btns {
+    width: 100% !important;
+    flex-wrap: wrap !important;
+  }
+
+  /* KPIs: 2 columns on mobile */
+  .kpi-grid { grid-template-columns: 1fr 1fr !important; }
+
+  /* Dash rows: 1 column */
+  .dash-row, .dash-row3 { grid-template-columns: 1fr !important; }
+
+  /* POS: full column stacked */
+  .pos-grid {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: 1fr auto !important;
+    height: 100% !important;
+  }
+  .pos-cart {
+    border-left: none !important;
+    border-top: 1px solid var(--hg-line) !important;
+    max-height: 44vh !important;
+  }
+
+  /* Tables: full horizontal scroll */
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* Hide subtitle in header */
+  .hide-sm { display: none !important; }
+  .hg-headsearch { display: none !important; }
+
+  /* Page padding reduced */
+  .app-fade {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  /* Login form full width */
+  .login-hero { display: none !important; }
+  .login-formwrap { flex: 1 1 100% !important; padding: 24px 20px !important; }
+}
+
+/* ===== Small phones (≤390px) ===== */
+@media (max-width: 390px) {
+  .kpi-grid { grid-template-columns: 1fr !important; }
+  .login-formwrap { padding: 20px 16px !important; }
+}

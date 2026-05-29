@@ -12,9 +12,10 @@ interface TopHeaderProps {
   subtitle?: string;
   onRoleSwitch: (role: Role) => void;
   onLogout: () => void;
+  onMenuToggle?: () => void;
 }
 
-export function TopHeader({ role, user, title, subtitle, onRoleSwitch, onLogout }: TopHeaderProps) {
+export function TopHeader({ role, user, title, subtitle, onRoleSwitch, onLogout, onMenuToggle }: TopHeaderProps) {
   const [menu, setMenu] = useState(false);
   const [roleOpen, setRoleOpen] = useState(false);
 
@@ -24,9 +25,23 @@ export function TopHeader({ role, user, title, subtitle, onRoleSwitch, onLogout 
       display: "flex", alignItems: "center", gap: 18, padding: "0 26px", zIndex: 20,
       boxShadow: "0 1px 0 rgba(8,25,63,.02)",
     }}>
+      {/* Hamburger (mobile only) */}
+      <button
+        onClick={onMenuToggle}
+        className="mobile-hamburger"
+        style={{
+          display: "none", width: 42, height: 42, borderRadius: 11,
+          border: "1px solid var(--hg-line)", background: "#fff",
+          color: "var(--hg-ink-2)", alignItems: "center", justifyContent: "center",
+          cursor: "pointer", flexShrink: 0,
+        }}
+      >
+        <Icon name="menu" size={20} />
+      </button>
+
       <div style={{ minWidth: 0 }}>
         <h1 style={{ margin: 0, fontSize: 20, fontWeight: 800, color: "var(--hg-ink)", letterSpacing: "-.01em" }}>{title}</h1>
-        {subtitle && <div style={{ fontSize: 12.5, color: "var(--hg-ink-3)", marginTop: 2, fontWeight: 600 }}>{subtitle}</div>}
+        {subtitle && <div style={{ fontSize: 12.5, color: "var(--hg-ink-3)", marginTop: 2, fontWeight: 600 }} className="hide-sm">{subtitle}</div>}
       </div>
 
       <div style={{ flex: 1 }} />
